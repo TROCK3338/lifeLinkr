@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const year = today.getFullYear();
         const month = today.getMonth();
         
-        // First day of month
+        
         const firstDay = new Date(year, month, 1).getDay();
-        // Days in month
+    
         const daysInMonth = new Date(year, month + 1, 0).getDate();
         
         datesContainer.innerHTML = '';
@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
             dateCell.classList.add('date');
             dateCell.textContent = day;
             
-            // Highlight some available dates
             if ([5, 12, 19, 26].includes(day)) {
                 dateCell.style.backgroundColor = '#dbeafe';
                 dateCell.style.color = '#2563eb';
@@ -43,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Calendar visibility control
+    // Enhanced calendar visibility control
     function handleCalendarVisibility() {
         const trustedSection = document.getElementById('trustedSection');
         const footerSection = document.getElementById('footerSection');
@@ -54,9 +53,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const trustedBottom = trustedSection.offsetTop + trustedSection.offsetHeight;
         const footerTop = footerSection.offsetTop;
         const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
         
-        // Show calendar when features section starts until footer begins
-        if (scrollY >= trustedBottom && scrollY < footerTop) {
+        
+        const calendarBottomPosition = scrollY + 520; 
+        
+        
+        const footerBuffer = 100;
+        
+        
+        if (scrollY >= trustedBottom && calendarBottomPosition < (footerTop - footerBuffer)) {
             calendarWidget.classList.add('show');
         } else {
             calendarWidget.classList.remove('show');
@@ -116,5 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize
     generateCalendar();
     window.addEventListener('scroll', handleCalendarVisibility);
-    handleCalendarVisibility(); // Initial check
+    window.addEventListener('resize', handleCalendarVisibility); 
+    handleCalendarVisibility(); 
 });
