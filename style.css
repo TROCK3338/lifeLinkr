@@ -305,7 +305,8 @@
 /* FAQs Section */
 .faqs-section {
   background: #f8fafc;
-  padding: 40px 0;
+  /* padding: 40px 80px; */
+  /* width: 200px; */
 }
 .faqs-box {
   background: #fff;
@@ -1041,4 +1042,10 @@ body.calendar-visible {
     border-radius: 16px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.15);
     padding: 1.8rem;
+}
+
+@media (max-width: 991.98px) {
+  #calendarWidget {
+    display: none !important;
+  }
 }
